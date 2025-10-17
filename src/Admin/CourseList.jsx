@@ -1,6 +1,3 @@
-
-
-
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { FaTrash, FaEdit, FaPlusCircle, FaBook } from "react-icons/fa";
@@ -30,12 +27,11 @@ const CourseList = () => {
     name: "",
     code: "",
     description: "",
-    duration: "",
   });
 
   // ✅ Open Add Modal
   const openAddModal = () => {
-    setFormData({ name: "", code: "", description: "", duration: "" });
+    setFormData({ name: "", code: "", description: "" });
     setIsAddOpen(true);
   };
 
@@ -46,7 +42,6 @@ const CourseList = () => {
       name: course.courseName,
       code: course.courseCode,
       description: course.description,
-      duration: course.duration,
     });
     setIsEditOpen(true);
   };
@@ -67,13 +62,12 @@ const CourseList = () => {
           courseName: formData.name,
           courseCode: formData.code,
           description: formData.description,
-          duration: formData.duration,
         })
       );
 
       if (addCourse.fulfilled.match(resultAction)) {
         setIsAddOpen(false);
-        setFormData({ name: "", code: "", description: "", duration: "" });
+        setFormData({ name: "", code: "", description: "" });
         dispatch(getCourse()); // refresh the list
       } else {
         alert(resultAction.payload || "Failed to add course");
@@ -98,14 +92,13 @@ const CourseList = () => {
             courseName: formData.name,
             courseCode: formData.code,
             description: formData.description,
-            duration: formData.duration,
           },
         })
       );
 
       if (updateCourse.fulfilled.match(resultAction)) {
         setIsEditOpen(false);
-        setFormData({ name: "", code: "", description: "", duration: "" });
+        setFormData({ name: "", code: "", description: "" });
         dispatch(getCourse());
       } else {
         alert(resultAction.payload || "Failed to update course");
@@ -142,14 +135,6 @@ const CourseList = () => {
       course.courseCode.toLowerCase().includes(searchQuery.toLowerCase()) ||
       course.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
-  // ✅ Format Duration
-  const formatDuration = (minutes) =>
-    minutes >= 60
-      ? `${Math.floor(minutes / 60)}h ${
-          minutes % 60 > 0 ? minutes % 60 + "m" : ""
-        }`
-      : `${minutes} min`;
 
   return (
     <div className="relative bg-gradient-to-br from-gray-100 to-gray-200 min-h-screen text-gray-800 overflow-hidden font-sans">
@@ -227,9 +212,6 @@ const CourseList = () => {
                   <strong>Code:</strong> {course.courseCode}
                 </p>
                 <p className="text-gray-700 mb-3">{course.description}</p>
-                <span className="text-gray-700">
-                  <strong>Duration:</strong> {formatDuration(course.duration)}
-                </span>
               </div>
 
               {/* ✅ Buttons Row */}
@@ -305,14 +287,6 @@ const CourseList = () => {
                 name="description"
                 placeholder="Description"
                 value={formData.description}
-                onChange={handleChange}
-                className="border border-gray-300 p-3 rounded-xl focus:ring-2 focus:ring-blue-400 focus:outline-none"
-              />
-              <input
-                type="number"
-                name="duration"
-                placeholder="Duration (minutes)"
-                value={formData.duration}
                 onChange={handleChange}
                 className="border border-gray-300 p-3 rounded-xl focus:ring-2 focus:ring-blue-400 focus:outline-none"
               />
