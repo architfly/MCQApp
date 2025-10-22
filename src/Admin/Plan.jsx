@@ -13,58 +13,26 @@ const Plan = () => {
   const [plans, setPlans] = useState([]);
   const [editPlan, setEditPlan] = useState(null);
   const [editData, setEditData] = useState({ name: "", duration: 1, price: 0 });
+  const [showForm, setShowForm] = useState(false);
+  const [newPlan, setNewPlan] = useState({ name: "", duration: 1, price: 0 });
 
   const dispatch = useDispatch();
 
-  const [newPlan, setNewPlan] = useState({
-    name: "",
-    duration: 1,
-    price: 0,
-  });
-
-  const { plans1, isLoading, isError } = useSelector(
-    (state) => state.GetAllPlans
-  );
+  // ✅ Updated selector
+  const { plans1, isLoading, isError } = useSelector((state) => state.GetAllPlans);
 
   useEffect(() => {
     dispatch(GetAllPlans());
   }, [dispatch]);
 
-  console.log("plan", plans1);
-
-  const [showForm, setShowForm] = useState(false);
-
   const showSuccessToast = (message) => {
-    toast.success(message, {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
+    toast.success(message, { position: "top-right", autoClose: 3000 });
   };
-
   const showErrorToast = (message) => {
-    toast.error(message, {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
+    toast.error(message, { position: "top-right", autoClose: 3000 });
   };
-
   const showWarningToast = (message) => {
-    toast.warning(message, {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
+    toast.warning(message, { position: "top-right", autoClose: 3000 });
   };
 
   const handleUpdatePlan = async () => {
@@ -87,10 +55,7 @@ const Plan = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setNewPlan((prev) => ({
-      ...prev,
-      [name]: name === "name" ? value : Number(value),
-    }));
+    setNewPlan((prev) => ({ ...prev, [name]: name === "name" ? value : Number(value) }));
   };
 
   const handleAddPlan = async () => {
@@ -102,13 +67,11 @@ const Plan = () => {
     try {
       await dispatch(AddPlan(newPlan));
       const addedPlan = { ...newPlan, id: Date.now() };
-
       setPlans([...plans, addedPlan]);
-
       setNewPlan({ name: "", duration: 1, price: 0 });
       setShowForm(false);
       showSuccessToast("Plan added successfully!");
-      dispatch(GetAllPlans()); // Refresh the list after adding
+      dispatch(GetAllPlans());
     } catch (error) {
       console.log("Failed to add plan", error);
       showErrorToast("Failed to add plan");
@@ -116,27 +79,19 @@ const Plan = () => {
   };
 
   const handleDelete = async (id, planName) => {
-   
+    try {
+      await dispatch(DeletePlan(id)).unwrap();
+      showSuccessToast("Plan deleted successfully!");
+      dispatch(GetAllPlans());
+    } catch (error) {
+      console.log("error in delete", error);
+      showErrorToast("Failed to delete plan");
+    }
+  };
 
-    
-      try {
-        await dispatch(DeletePlan(id)).unwrap();
-        showSuccessToast("Plan deleted successfully!");
-        dispatch(GetAllPlans()); // refresh
-      } catch (error) {
-        console.log("error in delete", error);
-        showErrorToast("Failed to delete plan");
-      }
-     };
-
-  // Function to handle edit button click
   const handleEditClick = (plan) => {
     setEditPlan(plan);
-    setEditData({
-      name: plan.name,
-      duration: plan.duration,
-      price: plan.price,
-    });
+    setEditData({ name: plan.name, duration: plan.duration, price: plan.price });
   };
 
   return (
@@ -227,65 +182,41 @@ const Plan = () => {
               <h3 className="text-lg font-semibold mb-4">Edit Plan</h3>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Plan Name
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Plan Name</label>
                   <input
                     type="text"
                     name="name"
                     value={editData.name}
-                    onChange={(e) =>
-                      setEditData({ ...editData, name: e.target.value })
-                    }
+                    onChange={(e) => setEditData({ ...editData, name: e.target.value })}
                     className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:border-blue-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Duration (months)
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Duration (months)</label>
                   <input
                     type="number"
                     name="duration"
                     value={editData.duration}
-                    onChange={(e) =>
-                      setEditData({
-                        ...editData,
-                        duration: Number(e.target.value),
-                      })
-                    }
+                    onChange={(e) => setEditData({ ...editData, duration: Number(e.target.value) })}
                     className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:border-blue-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Price (₹)
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Price (₹)</label>
                   <input
                     type="number"
                     name="price"
                     value={editData.price}
-                    onChange={(e) =>
-                      setEditData({
-                        ...editData,
-                        price: Number(e.target.value),
-                      })
-                    }
+                    onChange={(e) => setEditData({ ...editData, price: Number(e.target.value) })}
                     className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:border-blue-500"
                   />
                 </div>
                 <div className="flex gap-3 pt-2">
-                  <button
-                    onClick={handleUpdatePlan}
-                    className="flex-1 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
-                  >
+                  <button onClick={handleUpdatePlan} className="flex-1 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
                     Update
                   </button>
                   <button
-                    onClick={() => {
-                      setEditPlan(null);
-                      setEditData({ name: "", duration: 1, price: 0 });
-                    }}
+                    onClick={() => { setEditPlan(null); setEditData({ name: "", duration: 1, price: 0 }); }}
                     className="flex-1 px-4 py-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors"
                   >
                     Cancel
@@ -301,49 +232,30 @@ const Plan = () => {
           <table className="w-full">
             <thead className="bg-gray-100 border-b">
               <tr>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
-                  Plan Name
-                </th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
-                  Duration
-                </th>
-                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
-                  Price
-                </th>
-                <th className="px-6 py-3 text-right text-sm font-semibold text-gray-700">
-                  Actions
-                </th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">Plan Name</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">Duration</th>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">Price</th>
+                <th className="px-6 py-3 text-right text-sm font-semibold text-gray-700">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
-              {plans1?.data?.map((plan, id) => (
+              {/* ✅ Updated map to plans1 directly */}
+              {plans1?.map((plan, id) => (
                 <tr key={id} className="hover:bg-gray-50 transition-colors">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
                       <Crown className="w-5 h-5 text-yellow-500" />
-                      <span className="font-medium text-gray-900">
-                        {plan.name}
-                      </span>
+                      <span className="font-medium text-gray-900">{plan.name}</span>
                     </div>
                   </td>
-                  <td className="px-6 py-4 text-gray-700">
-                    {plan.duration} {plan.duration === 1 ? "month" : "months"}
-                  </td>
-                  <td className="px-6 py-4 text-gray-900 font-semibold">
-                    ₹ {plan.price}
-                  </td>
+                  <td className="px-6 py-4 text-gray-700">{plan.duration} {plan.duration === 1 ? "month" : "months"}</td>
+                  <td className="px-6 py-4 text-gray-900 font-semibold">₹ {plan.price}</td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex justify-end gap-2">
-                      <button
-                        className="p-2 text-blue-600 hover:bg-blue-50 rounded transition-colors"
-                        onClick={() => handleEditClick(plan)}
-                      >
+                      <button className="p-2 text-blue-600 hover:bg-blue-50 rounded transition-colors" onClick={() => handleEditClick(plan)}>
                         <Edit className="w-4 h-4" />
                       </button>
-                      <button
-                        onClick={() => handleDelete(plan._id, plan.name)}
-                        className="p-2 text-red-600 hover:bg-red-50 rounded transition-colors"
-                      >
+                      <button onClick={() => handleDelete(plan._id, plan.name)} className="p-2 text-red-600 hover:bg-red-50 rounded transition-colors">
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
@@ -354,7 +266,7 @@ const Plan = () => {
           </table>
         </div>
 
-        {plans1?.data?.length === 0 && (
+        {plans1?.length === 0 && (
           <div className="text-center py-12 text-gray-500">
             No plans available. Add a new plan to get started.
           </div>

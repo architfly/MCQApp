@@ -45,8 +45,10 @@ const GetPromocodesSlice = createSlice({
       .addCase(GetPromocodes.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.isError = false;
-        state.getpromocodes = action.payload || []; // assuming API returns { success, data }
+        state.isError = false;state.getpromocodes = Array.isArray(action.payload)
+  ? action.payload          // Admin API returns array
+  : action.payload?.data || []; // User API returns { data: [...] }
+
       })
       .addCase(GetPromocodes.rejected, (state, action) => {
         state.isLoading = false;
