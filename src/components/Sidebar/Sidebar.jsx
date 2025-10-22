@@ -35,31 +35,14 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       icon: <FaGraduationCap />,
       dynamic: true, // custom flag to show courses dynamically
     },
-    { path: "/downloads", label: "Downloads", icon: <MdCloudDownload /> },
-    {
-      label: "Purchase",
-      icon: <FaShoppingCart />,
-      children: [
-        { path: "/purchase/purchase", label: "Purchase" },
-        { path: "/purchase/CourseCard", label: "CourseCard" },
-        { path: "/purchase/CourseForm", label: "CourseForm" },
-        { path: "/purchase/PaymentForm", label: "PaymentForm" },
-        { path: "/purchase/Confirmation", label: "Confirmation" },
-      ],
-    },
-    {
-      label: "Settings",
-      icon: <IoSettingsSharp />,
-      children: [
-        { path: "/settings/general-settings", label: "General Settings" },
-        { path: "/settings/payment-settings", label: "Payment Settings" },
-        { path: "/settings/my-purchases", label: "My Purchases" },
-        { path: "/settings/my-feedback", label: "My Feedback" },
-      ],
-    },
+    
+    
+
+    { path: "/purchase", label: "Purchase" , icon: <FaShoppingCart />},
+ 
     { path: "/our-team", label: "Our Team", icon: <FaUsers /> },
     { path: "/faq", label: "FAQ", icon: <FaQuestion /> },
-    { path: "/contact", label: "Contact", icon: <FaQuestion /> },
+    
   ];
 
   return (

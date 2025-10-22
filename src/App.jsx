@@ -17,19 +17,12 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import Login from "./components/login/login";
 import Signup from "./components/login/Signup";
 import Courses from "./Pages/Courses/Courses";
-import Downloads from "./Pages/Download/Download";
+ 
 import PrivateLessons from "./Pages/Privatelessons/PrivateLessons";
  
-import PaymentForm from "./Pages/Purchase/PaymentForm";
-import CourseCard from "./Pages/Purchase/CourseCard";
-import CourseForm from "./Pages/Purchase/CourseForm";
-import Confirmation from "./Pages/Purchase/Confirmation";
-import GeneralSettings from "./Pages/Settings/GeneralSettings";
-import MyFeedback from "./Pages/Settings/MyFeedback";
-import MyPurchases from "./Pages/Settings/MyPurchases";
-import PaymentSettings from "./Pages/Settings/PaymentSettings";
+ 
 import Ourteam from "./Pages/Ourteam/Ourteam";
-import Contact from "./Pages/Contact/Contact";
+ 
 import Faq from "./Pages/Faq/Faq";
 import Airlaw from "./components/Atpl/Airlaw";
 import AircraftGeneralKnowledge from "./components/Atpl/AircraftGeneralKnowledge";
@@ -37,6 +30,7 @@ import Communication from "./components/Atpl/Communication";
 import CrmKurulMulakati from "./Pages/Privatelessons/CrmKurulMulakati";
 import AircraftTest from "./components/Atpl/AircraftTest/AircraftTest";
 import AircraftResult from "./components/Atpl/AircraftTest/AircraftResult";
+import UserPurchase from "./Pages/Purchase/Purchase";
 
 // Admin pages
 import AdminDashboard from "./Admin/AdminDashboard";
@@ -134,25 +128,19 @@ function App() {
                 <Route path="/courses/airlaw" element={<Airlaw />} />
                 <Route path="/courses/aircraft" element={<AircraftGeneralKnowledge />} />
                 <Route path="/courses/communication" element={<Communication />} />
-                <Route path="/downloads" element={<Downloads />} />
+              
                 <Route path="/private-lessons" element={<PrivateLessons />} />
                 <Route path="/private-lessons/crm-kurul-mulakati" element={<CrmKurulMulakati />} />
-                <Route path="/purchase/purchase" element={<Purchase />} />
-                <Route path="/purchase/PaymentForm" element={<PaymentForm />} />
-                <Route path="/purchase/CourseCard" element={<CourseCard />} />
-                <Route path="/purchase/CourseForm" element={<CourseForm />} />
-                <Route path="/purchase/Confirmation" element={<Confirmation />} />
-                <Route path="/settings/general-settings" element={<GeneralSettings />} />
-                <Route path="/settings/payment-settings" element={<PaymentSettings />} />
-                <Route path="/settings/my-purchases" element={<MyPurchases />} />
-                <Route path="/settings/my-feedback" element={<MyFeedback />} />
+                
+             
                 <Route path="/our-team" element={<Ourteam />} />
                 <Route path="/faq" element={<Faq />} />
-                <Route path="/contact" element={<Contact />} />
+        
                 <Route path="/aircraft-test" element={<AircraftTest />} />
                 <Route path="/aircraft-result" element={<AircraftResult />} />
                 <Route path="/Courses/:courseId" element={<Courses />} />
                 <Route path="/Courses/:courseId/test" element={<Test/>} />
+                <Route path="/Purchase" element={<UserPurchase/>} />
               </Routes>
             </main>
           </div>

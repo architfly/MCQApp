@@ -21,7 +21,7 @@ import GetAllPlansSlice from "../APIRedux/PlanReducer/PlanReducerGet";
 import UpdatePlanSlice from "../APIRedux/PlanReducer/PlanReducerEdit";
 import DeletePlanSlice from "../APIRedux/PlanReducer/PlanReducerDelete";
 import AddPromocodeSlice from "../APIRedux/PromocodeReducer/PromocodeCreate";
-import GetPromocodesSlice  from "../APIRedux/PromocodeReducer/PromocdeGetAll";
+import GetPromocodesSlice  from "../APIRedux/PromocodeReducer/PromocodeGetAll";
 import EditPromocodeSlice from "../APIRedux/PromocodeReducer/PromocodeEdit";
 import DeletePromocodeSlice from "../APIRedux/PromocodeReducer/PromocodeDelete";
 

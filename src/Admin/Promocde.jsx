@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { toast } from "react-toastify";
 import { AddPromocode } from "../APIRedux/PromocodeReducer/PromocodeCreate";
-import { GetPromocodes } from "../APIRedux/PromocodeReducer/PromocdeGetAll";
+import { GetPromocodes } from "../APIRedux/PromocodeReducer/PromocodeGetAll";
 import { EditPromocode } from "../APIRedux/PromocodeReducer/PromocodeEdit";
 import { DeletePromocode } from "../APIRedux/PromocodeReducer/PromocodeDelete";
 
