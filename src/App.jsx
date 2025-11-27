@@ -18,7 +18,7 @@ import Login from "./components/login/login";
 import Signup from "./components/login/Signup";
 import Courses from "./Pages/Courses/Courses";
  
-import PrivateLessons from "./Pages/Privatelessons/PrivateLessons";
+
  
  
 import Ourteam from "./Pages/Ourteam/Ourteam";
