@@ -44,7 +44,8 @@ import PlanPromocode from "./Admin/PlanPromocode";
 import Purchase from "./Admin/Purchase";
 
 import { ToastContainer } from "react-toastify";
-import Test from "./components/Test/test";
+import Test from "./components/Test/Test";
+import Privatelessons from "./Pages/Privatelessons/Privatelessons";
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -129,7 +130,7 @@ function App() {
                 <Route path="/courses/aircraft" element={<AircraftGeneralKnowledge />} />
                 <Route path="/courses/communication" element={<Communication />} />
               
-                <Route path="/private-lessons" element={<PrivateLessons />} />
+                <Route path="/private-lessons" element={<Privatelessons />} />
                 <Route path="/private-lessons/crm-kurul-mulakati" element={<CrmKurulMulakati />} />
                 
              
