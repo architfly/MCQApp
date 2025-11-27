@@ -87,9 +87,9 @@ const Courses = () => {
             <h1 className="text-4xl font-bold text-gray-900">Available Tests</h1>
           </div>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Choose from our carefully curated tests to assess your knowledge and track your progress
+           
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mx-auto mt-4 rounded-full"></div>
+          <div className="w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mx-auto mt-4 rounded-full"></div>
         </div>
 
         {/* Stats and Search Section */}
@@ -119,6 +119,7 @@ const Courses = () => {
                   className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 bg-gray-50"
                 />
               </div>
+              
             </div>
           </div>
         </div>
@@ -173,7 +174,7 @@ const Courses = () => {
                             {test.testName}
                           </h3>
                           <p className="text-sm text-gray-500 mt-1 line-clamp-2">
-                            {test.description || "Comprehensive assessment test covering all key topics"}
+                            {test.description }
                           </p>
                           <div className="flex items-center mt-2 space-x-2">
                             <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getDifficultyColor(test.difficulty)}`}>

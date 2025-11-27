@@ -14,7 +14,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8000", // ✅ Vite syntax
+  baseURL: "https://mcqserver-2s2i.onrender.com", // ✅ Vite syntax
   timeout: 20000,
   headers: {
     "Content-Type": "application/json",
